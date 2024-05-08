@@ -1,9 +1,7 @@
-import { VoidReturnType } from "@/utils/constants";
 import { FormFieldsProps } from "@/utils/form-config";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Form, FormItemProps, Select, SelectProps, Tooltip } from "antd";
 import classNames from "classnames";
-import Image from "next/image";
 import { useState } from "react";
 import { FormLabel } from "./form-label";
 
@@ -76,14 +74,6 @@ export const DropdownField = ({
         <Select
           title=" "
           mode={type === "multi_select" ? "multiple" : undefined}
-          suffixIcon={
-            <SelectIcon
-              data-testid={`dropdown${name ?? ""}`}
-              onClick={() => {
-                setOpenDropdown(!openDropdown);
-              }}
-            />
-          }
           onDropdownVisibleChange={setOpenDropdown}
           className="h-[44px] text-[14px] font-[400] font-primary w-[100%]"
           open={openDropdown}
@@ -95,15 +85,3 @@ export const DropdownField = ({
     </div>
   );
 };
-
-export const SelectIcon = ({ onClick }: { onClick?: VoidReturnType }) => (
-  <Image
-    src={require("public/assets/chevron.svg")}
-    height={20}
-    width={20}
-    alt="Select"
-    className="cursor-pointer ml-[10px]"
-    data-testid="dropdownIcon"
-    onClick={onClick}
-  />
-);

@@ -1,6 +1,4 @@
-import { setEndDateError } from "@redux/slices/endDateErrorSlice";
-import { dispatch } from "@redux/store";
-import { endDateErrorHandler } from "@utils/modules";
+import { SecondaryButtonProps } from "@/utils/interfaces";
 import { Form, FormProps } from "antd";
 import { FormInstance } from "antd/lib";
 import classNames from "classnames";
@@ -17,18 +15,15 @@ import {
   UPLOAD,
 } from "../../utils/constants";
 import { FormConfigData } from "../../utils/form-config";
-import { TextInputField } from "../Form/form-fileds/textInputField";
-import { TimePickerField } from "../Form/form-fileds/timePickerField";
-import { UploadField } from "../Form/form-fileds/uploadField";
-import {
-  SecondaryButtonProps,
-  SecondaryButtonPropsWithoutTitleRequired,
-} from "./buttons";
+import { FormBottomActionBar } from "./bottomActionBar";
 import { DatePickerField } from "./form-fileds/date-picker-field";
 import { DropdownField } from "./form-fileds/dropdown-field";
 import { RadioButtonField } from "./form-fileds/radio-button-field";
 import { TextAreaField } from "./form-fileds/text-area-field";
 import TextEditor from "./form-fileds/text-editor";
+import { TextInputField } from "./form-fileds/textInputField";
+import { TimePickerField } from "./form-fileds/timePickerField";
+import { UploadField } from "./form-fileds/uploadField";
 
 export interface FormComponentProps {
   formConfig?: (FormConfigData[] | FormConfigData)[];
@@ -54,9 +49,8 @@ export interface FormComponentProps {
   canSubmit?: (submit: boolean) => void;
   getFormInstance?: (form: FormInstance<any>) => void;
   submitButtonRef?: any;
-  saveAsDraftButtonProps?: SecondaryButtonPropsWithoutTitleRequired;
+  saveAsDraftButtonProps?: SecondaryButtonProps;
   layout?: "horizontal" | "vertical";
-  restrictEndDateError?: boolean;
 }
 
 export const FormComponent = ({
@@ -85,7 +79,6 @@ export const FormComponent = ({
   submitButtonRef,
   saveAsDraftButtonProps,
   layout = "vertical",
-  restrictEndDateError = false,
 }: FormComponentProps) => {
   const [form] = Form.useForm();
   const values = Form.useWatch([], form);
@@ -117,12 +110,10 @@ export const FormComponent = ({
     getFormInstance?.(form);
     form?.validateFields({ validateOnly: true }).then(
       () => {
-        !restrictEndDateError && dispatch(setEndDateError(false));
         setSubmittable(true);
         canSubmit?.(true);
       },
       (e) => {
-        !restrictEndDateError && endDateErrorHandler(e?.errorFields);
         if (e?.errorFields?.length === 0) {
           setSubmittable(true);
           canSubmit?.(true);

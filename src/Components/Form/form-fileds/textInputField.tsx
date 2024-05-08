@@ -1,6 +1,6 @@
 import { VoidReturnType } from "@/utils/constants";
 import { FormFieldsProps } from "@/utils/form-config";
-import { capitalizeFirstLetter, preventSpaces } from "@/utils/mudles";
+import { capitalizeFirstLetter, preventSpaces } from "@/utils/helpers";
 import {
   Checkbox,
   Form,
@@ -12,7 +12,6 @@ import {
 } from "antd";
 import { CheckboxChangeEvent } from "antd/es/checkbox";
 import classNames from "classnames";
-import Image from "next/image";
 import { useState } from "react";
 import { FormLabel } from "./form-label";
 
@@ -89,7 +88,7 @@ export const TextInputField = ({
                 const value = event?.target?.value;
                 if (value?.trim()?.length === 0) {
                   form?.setFieldValue(name, undefined);
-                } else if (name === NAME) {
+                } else if (name === "name") {
                   form?.setFieldValue(name, capitalizeFirstLetter(value));
                 } else if (fieldProps?.type === "number") {
                   const regex = /^\d*\.?\d{0,2}$/;
@@ -105,7 +104,6 @@ export const TextInputField = ({
               className={inputClassname}
               data-testid="textInputPassword"
               visibilityToggle={true}
-              iconRender={iconRender}
               maxLength={250}
               min={0}
               {...fieldProps}
@@ -137,17 +135,3 @@ export const TextInputField = ({
     </>
   );
 };
-
-const iconRender = (visible: boolean) => (
-  <Image
-    src={
-      visible
-        ? require("../../public/assets/eyeOn.svg")
-        : require("../../public/assets/eyeOff.svg")
-    }
-    height={20}
-    width={20}
-    alt="Show Password"
-    data-testid={visible ? "eyeOn" : "eyeOff"}
-  />
-);

@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { ReactQuillProps } from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { isUrl } from "../../../utils/mudles";
+import { isUrl } from "../../../utils/helpers";
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 export interface TextEditorProps extends FormFieldsProps {

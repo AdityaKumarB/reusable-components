@@ -11,3 +11,18 @@ export const RADIO = "radio";
 export const TAGS = "tags";
 export const TEXT_EDITOR = "text_editor";
 export const defaultFormDateFormat = "DD - MM - YYYY";
+export const START_TIME = 'start_time'
+export const END_TIME = 'end_time'
+
+export const barChartUtils: any = {
+    types: [
+      {
+        label: "Available",
+        color: "#BFDBFE",
+      },
+      {
+        label: "Redeemed",
+        color: "#1D4ED8",
+      },
+    ],
+  };

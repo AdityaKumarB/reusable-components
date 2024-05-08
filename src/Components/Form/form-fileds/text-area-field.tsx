@@ -1,5 +1,5 @@
 import { FormFieldsProps } from "@/utils/form-config";
-import { preventSpaces } from "@/utils/mudles";
+import { preventSpaces } from "@/utils/helpers";
 import { Form, FormInstance, FormItemProps, Input } from "antd";
 import { TextAreaProps } from "antd/es/input";
 import classNames from "classnames";

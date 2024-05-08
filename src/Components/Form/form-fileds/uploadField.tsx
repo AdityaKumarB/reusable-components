@@ -1,8 +1,8 @@
 import { FormFieldsProps } from "@/utils/form-config";
+import { FileOutlined } from "@ant-design/icons";
 import { Form, FormItemProps, Space, Upload, UploadProps } from "antd";
 import { FormInstance } from "antd/lib";
 import classNames from "classnames";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { FormLabel } from "./form-label";
 
@@ -55,50 +55,12 @@ interface FileComponentProps {
   identifier?: string;
 }
 
-const pngImage = (uploadType: string, disabled: boolean = false) => {
-  return uploadType === "png/jpeg" ? (
-    <Image
-      src={require("../../public/assets/image.svg")}
-      width={29}
-      height={29}
-      alt=""
-      data-testid="image"
-    />
-  ) : (
-    <Image
-      src={require(`../../public/assets/${
-        disabled ? "inActiveFolder" : "folderArrowUp"
-      }.svg`)}
-      width={29}
-      height={29}
-      alt=""
-      data-testid="folderArrowUp"
-    />
-  );
-};
-
-const Loader = () => (
-  <Image
-    src={require("../../public/assets/spinner.svg")}
-    width={29}
-    height={29}
-    alt=""
-    className="loader"
-  />
-);
-
 const UploadCompletedView = () => (
   <Space
     direction="vertical"
     className="items-center"
     data-testid="uploadCompleteView"
   >
-    <Image
-      src={require("../../public/assets/checkmarkCircle.svg")}
-      height={34}
-      width={34}
-      alt=""
-    />
     <Space className="text-[12px] font-primary font-[500] text-paletteBlue">
       {`Uploaded Successfully`}
     </Space>
@@ -392,7 +354,7 @@ const FileUploadStatus = ({
   fileProps: FileComponentProps["fileProps"];
 }) => {
   if (fileProps?.uploading) {
-    return <Loader />;
+    return <></>;
   }
   if (fileProps?.uploadComplete) {
     return <UploadCompletedView />;
@@ -443,7 +405,7 @@ const FileComponent = ({
 
             {!fileProps?.uploading && !fileProps?.uploadComplete && (
               <>
-                {pngImage(uploadType, isDisabled)}
+                <FileOutlined />
                 <div
                   className="text-[12px] font-primary font-[400] text-paletteGray"
                   data-testid="uploadTypeHeader"
